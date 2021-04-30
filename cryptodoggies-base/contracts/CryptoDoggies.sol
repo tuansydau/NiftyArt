@@ -2,7 +2,6 @@ pragma solidity ^0.4.18;
 
 contract CryptoDoggies{
 	
-
 	struct Doggy{
 		uint age;
 		string name;
@@ -21,12 +20,21 @@ contract CryptoDoggies{
 		dna: bytes5(0xffffffffff)
 	});
 
-	function _createDoggy(uint _age, string _name, bytes5 dna) private {
+	mapping (uint256 => address) private doggyIdToOwner;
+	mapping (address => uint256) private numOfDoggies;
+
+	event DoggyCreated(uint256 _id, string _name, uint _age, bytes5 _dna);
+
+	function createDoggy(uint _age, string _name, bytes5 dna) public {
 		Doggy memory _doggy = Doggy({
 			age: _age,
 			name: _name,
 			dna: _dna,
 		});
-		uint256 newdoggyId = doggies.push(_doggy) - 1;
+		uint256 newDoggyId = doggies.push(_doggy) - 1;
+		doggyIdToOwner[newDoggyId] = msg.sender;
+		numberOfDoggies[msg.sender] = numOfDoggies[msg.sender] + 1;
+	
+		DoggyCreated(newDoggyId, _name, _age, _dna);
 	}
 }
