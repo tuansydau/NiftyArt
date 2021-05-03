@@ -15,7 +15,7 @@ contract Migrations is Ownable {
 	}
 
 	function upgrade(address newAddress) public onlyOwner {
-		Miogrations upgraded = Migrations(newAddress);
+		Migrations upgraded = Migrations(newAddress);
 		upgraded.setCompleted(lastCompletedMigration);
 	}
 }
