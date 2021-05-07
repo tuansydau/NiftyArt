@@ -16,6 +16,12 @@ import "./AccessControl.sol";
 import "./ERC721.sol";
 import "./SafeMath.sol";
 
-contract CryptoDoggies{
+contract DeatiledERC721 is ERC721 {
+	function name() public view returns (string _name);
+	function symbol() public view returns (string _symbol);
 
+}
+
+contract CryptoDoggies is AccessControl, DetailedERC721{
+	using SafeMath for uint256;
 }
