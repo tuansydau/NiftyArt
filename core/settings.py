@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'basket',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -65,7 +67,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # Allows us to make this data available in all templates
-                'store.context_processors.categories'
+                'store.context_processors.categories',
+                'basket.context_processors.basket',
             ],
         },
     },
@@ -129,3 +132,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/front-end/img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'front-end/img')
+
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/dashboards'
+LOGIN_URL = '/account/login'

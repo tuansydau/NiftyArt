@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Home page url, namespace allows us to access it easier.
-    path('', include('store.urls', namespace='store'))
+    path('', include('store.urls', namespace='store')),
+    path('basket/', include('basket.urls', namespace='basket')),
 ]
 
 if settings.DEBUG:

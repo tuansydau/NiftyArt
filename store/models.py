@@ -1,12 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.urls import reverse
+from django.conf import settings
+
 
 class ProductManager(models.Manager):
     def get_queryset(self):
         return super(ProductManager, self).get_queryset().filter(is_active=True)
 
-        
+
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     # Allows us to reference a certain product in the URL
@@ -30,14 +31,14 @@ class Product(models.Model):
         Category, related_name='product', on_delete=models.CASCADE)
     # Building a foreign key for the user table that django makes, tells who created a product
     create_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='product_creator')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='product_creator')
     title = models.CharField(max_length=255)
     artist = models.CharField(max_length=255, default='admin')
     description = models.TextField(blank=True)
     # Storing the link to the image for a product
     image = models.ImageField(upload_to='images/')
     slug = models.SlugField(max_length=255)
-    price = models.DecimalField(max_digits=4, decimal_places=2)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     in_stock = models.BooleanField(default=True)
     # MIGHT NOT NEED IS_ACTIVE
     is_active = models.BooleanField(default=True)
