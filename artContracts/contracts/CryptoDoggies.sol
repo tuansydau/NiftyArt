@@ -20,6 +20,7 @@ contract DetailedERC721 is ERC721 {
 	function symbol() public view returns (string _symbol);
 }
 
+//refactor everything with either dna or cryptodoggies label
 contract CryptoDoggies is AccessControl, DetailedERC721{
 	using SafeMath for uint256;
 
@@ -39,6 +40,7 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 		bytes5 dna;
 	}
 
+	//rf
 	Doggy[] private doggies;
 
 	uint256 private startingPrice = 0.01 ether;
@@ -167,6 +169,7 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 		require(msg.value >= sellingPrice);
 
 		_transfer(oldOwner, newOwner, _tokenId);
+		tokenIdToPrice[_tokenId] = nextPriceOf(_tokenId);
 		TokenSold(
 			_tokenId,
 			doggies[_tokenId].name,
