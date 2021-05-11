@@ -203,17 +203,7 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 	
 	function nextPriceOf(uint256 _tokenId) public view returns (uint256 _nextPrice) {
 		uint256 _price = priceOf(_tokenId);
-		if (_price < increaseLimit1) {
-			return _price.mul(200).div(95);
-		} else if (_price < increaseLimit2){
-			return _price.mul(135).div(96);
-		} else if (_price < increaseLimit3){
-			return _price.mul(125).div(97);
-		} else if (_price < increaseLimit4){
-			return _price.mul(117).div(97);
-		} else {
-			return _price.mul(115).div(98);
-		}
+		return _price.add(.1);
 	}
 
 	function enableERC721() public onlyCEO {
