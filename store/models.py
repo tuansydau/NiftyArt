@@ -2,7 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 
-
+# Over-rides the objects model manager
+# Gets any query we want, but filters for only active products
 class ProductManager(models.Manager):
     def get_queryset(self):
         return super(ProductManager, self).get_queryset().filter(is_active=True)
@@ -58,6 +59,5 @@ class Product(models.Model):
         return reverse('store:product_detail', args=[self.slug])
 
     # When we return some data, it will give us the title
-
     def __str__(self):
         return self.title

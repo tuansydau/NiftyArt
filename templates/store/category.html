@@ -1,19 +1,29 @@
 {% extends "../base.html" %}
-{% load static %}
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
 {% block content %}
-<main>
+
+<main class="pt-5">
+  <div class="container" style="max-width: 1000px">
+    <div class="col-12">
+      <h1 class="h2">{{ category.name|title}}</h1>
+    </div>
+    <div class="col-12">
+      <div><b>Beautiful </b> selections to view</div>
+    </div>
+    <hr />
+  </div>
 
   <div class="container">
     <div class="row">
-      <div class="album py-5">
-      <div class="pb-3 h3">{{category.name|title}}</div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-
-        {% for product in products %}
-
+      <div class="album">
+        {% if not products %}
+        <div class="col-12">Sorry, there are currently no selections to choose from at this moment. <a
+            href="{% url 'store:store_home' %}">Home</a></div>
+        {% else %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+          {% for product in products %}
           <div class="col">
             <div class="card border-0">
               <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
@@ -28,15 +38,11 @@
               </div>
             </div>
           </div>
-
           {% endfor %}
-
         </div>
+        {% endif %}
       </div>
     </div>
 
   </div>
-
-
-</main>
-{% endblock %}
+  {% endblock %}
