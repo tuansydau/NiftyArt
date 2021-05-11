@@ -134,5 +134,7 @@ MEDIA_URL = '/front-end/img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'front-end/img')
 
 AUTH_USER_MODEL = 'account.UserBase'
-LOGIN_REDIRECT_URL = '/account/dashboards'
+LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
