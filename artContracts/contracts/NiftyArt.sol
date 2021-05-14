@@ -71,7 +71,7 @@ contract NiftyArt is AccessControl, DetailedERC721{
 			name: _name,
 			link: _link
 		});
-		uint256 newTokenId = arts.push(art) - 1;
+		uint256 newTokenId = arts.push(_art) - 1;
 		tokenIdToPrice[newTokenId] = _price;
 
 		TokenCreated(newTokenId, _name, _link, _price, _owner);
