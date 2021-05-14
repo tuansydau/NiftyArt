@@ -34,6 +34,7 @@ class Product(models.Model):
     create_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='product_creator')
     title = models.CharField(max_length=255)
+    tokenID = models.CharField(max_length=255)
     artist = models.CharField(max_length=255, default='admin')
     description = models.TextField(blank=True)
     # Storing the link to the image for a product

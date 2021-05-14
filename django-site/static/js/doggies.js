@@ -1,4 +1,5 @@
 /* Main Object to manage Contract interactions */
+//var os = require('os');
 var App = {
 
   contracts: {},
@@ -6,12 +7,12 @@ var App = {
 
   async init() {
     return await App.initWeb3();
-	},
+  },
 
   async initWeb3() {
     if (window.ethereum) {
       App.web3Provider = window.ethereum;
-      try{
+      try {
         await window.ethereum.enable();
         console.log("Metamask connected");
       } catch (error) {
@@ -39,17 +40,17 @@ var App = {
   //   },
 
   initContract() {
-    $.getJSON('CryptoDoggies.json', (data) => {
+    $.getJSON("/static/js/CryptoDoggies.json", (data) => {
       const CryptoDoggiesArtifact = data;
       App.contracts.CryptoDoggies = TruffleContract(CryptoDoggiesArtifact);
       App.contracts.CryptoDoggies.setProvider(App.web3Provider);
       return App.loadDoggies();
     });
     return App.bindEvents();
-  }, 
+  },
 
   loadDoggies() {
-    web3.eth.getAccounts(function(err, accounts){
+    web3.eth.getAccounts(function (err, accounts) {
       if (err != null) {
         console.error("An error occurred: " + err);
       } else if (accounts.length == 0) {
@@ -62,13 +63,13 @@ var App = {
     var address = web3.eth.defaultAccount;
     let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
     return totalSupply = contractInstance.totalSupply().then((supply) => {
-      for (var i = 0; i < supply; i++){
+      for (var i = 0; i < supply; i++) {
         App.getDoggyDetails(i, address);
       }
     }).catch((err) => {
       console.log(err.message);
     });
-  }, 
+  },
 
   getDoggyDetails(doggyId, localAddress) {
     let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
@@ -81,36 +82,18 @@ var App = {
         'doggyNextPrice': web3.fromWei(doggy[3]).toNumber(),
         'ownerAddress': doggy[4]
       };
-      if (doggyJson.ownerAddress !== localAddress){
-        loadDoggy(
-          doggyJson.doggyId,
-          doggyJson.doggyName,
-          doggyJson.doggyDna,
-          doggyJson.doggyPrice,
-          doggyJson.doggyNextPrice,
-          doggyJson.ownerAddress,
-          false
-        );
-      } else {
-        loadDoggy(
-          doggyJson.doggyId,
-          doggyJson.doggyName,
-          doggyJson.doggyDna,
-          doggyJson.doggyPrice,
-          doggyJson.doggyNextPrice,
-          doggyJson.ownerAddress,
-          true
-        );
-      }
     }).catch((err) => {
       console.log(err.message);
     });
   },
 
-  handlePurchase(event) {
+  handlePurchase(event, tokenId) {
     event.preventDefault();
+    console.log('handlePurchase function');
+    var doggyId = tokenId;
+    //var doggyId = $(event.target.elements).closest('.checkout-button').data('index');
 
-    var doggyId = parseInt($(event.target.elements).closest('.btn-buy').data('id'));
+    //parseInt($(event.target.elements).closest('.btn-buy').data('id'));
 
     web3.eth.getAccounts((error, accounts) => {
       if (error) {
@@ -120,6 +103,7 @@ var App = {
 
       let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
       contractInstance.priceOf(doggyId).then((price) => {
+        console.log("before priceOf(doggyId)")
         return contractInstance.purchase(doggyId, {
           from: account,
           value: price,
@@ -137,7 +121,7 @@ var App = {
 };
 
 /* Generates a Doggy image based on Doggy DNA */
-function generateDoggyImage(doggyId, size, canvas){
+function generateDoggyImage(doggyId, size, canvas) {
   size = size || 10;
   var data = doggyidparser(doggyId);
   var canvas = document.getElementById(canvas);
@@ -145,25 +129,25 @@ function generateDoggyImage(doggyId, size, canvas){
   canvas.height = size * data[1].length;
   var ctx = canvas.getContext("2d");
 
-  for(var i = 0; i < data.length; i++){
-      for(var j = 0; j < data[i].length; j++){
-          var color = data[i][j];
-          if(color){
-          ctx.fillStyle = color;
-          ctx.fillRect(i * size, j * size, size, size);
-          }
+  for (var i = 0; i < data.length; i++) {
+    for (var j = 0; j < data[i].length; j++) {
+      var color = data[i][j];
+      if (color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(i * size, j * size, size, size);
       }
+    }
   }
   return canvas.toDataURL();
 }
 
-function loadDoggy(doggyId, doggyName, doggyDna, doggyPrice, doggyNextPrice, ownerAddress, locallyOwned){
+function loadDoggy(doggyId, doggyName, doggyDna, doggyPrice, doggyNextPrice, ownerAddress, locallyOwned) {
   var cardRow = $('#card-row');
   var cardTemplate = $('#card-template');
 
   if (locallyOwned) {
     cardTemplate.find('btn-buy').attr('disabled', true);
-  } else{
+  } else {
     cardTemplate.find('btn-buy').removeAttr('disabled');
   }
 
@@ -183,9 +167,9 @@ function loadDoggy(doggyId, doggyName, doggyDna, doggyPrice, doggyNextPrice, own
 /* Called When Document has loaded */
 jQuery(document).ready(
   function ($) {
-		App.init();
-  //  loadDoggy(0, "Steve", "0x003f04e2e4", "0.100", "0.200", "0x8aFf4148A9FeB7fB456412095A235BafD8a7787a", false);
-  //  loadDoggy(1, "Alfred", "0x003f323ef3", "0.100", "0.200", "0x8aFf4148A9FeB7fB456412095A235BafD8a7787a", false);
-  //  loadDoggy(2, "Alfredo", "0x0012123553", "0.100", "0.200", "0x8aFf4148A9FeB7fB456412095A235BafD8a7787a", false);
+    App.init();
+    //  loadDoggy(0, "Steve", "0x003f04e2e4", "0.100", "0.200", "0x8aFf4148A9FeB7fB456412095A235BafD8a7787a", false);
+    //  loadDoggy(1, "Alfred", "0x003f323ef3", "0.100", "0.200", "0x8aFf4148A9FeB7fB456412095A235BafD8a7787a", false);
+    //  loadDoggy(2, "Alfredo", "0x0012123553", "0.100", "0.200", "0x8aFf4148A9FeB7fB456412095A235BafD8a7787a", false);
   }
 );
