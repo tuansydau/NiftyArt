@@ -18,6 +18,9 @@
       {% if basket|length == 0 %}
       <div class="col-12">Your basket is empty <a href="{% url 'store:store_home' %}">Shop</a></div>
       {% else %}
+      
+      {% for item in basket %} 
+      {% with product=item.product %}
       <div class="col-12 bg-light p-3 d-flex justify-content-between">
         <div class="d-flex d-flex-inline">
           <div class="pe-3">Order</div>
@@ -29,16 +32,16 @@
           
         </div>
       </div>
+     
       <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
         <div class="d-grid gap-2 ">
-          <a role="button" href="" class="btn btn-success fw-bold" type="button">Checkout</a>
+          <a type="button" id="checkout-button" data-index="{{product.tokenID}}" class="checkout-button btn btn-success fw-bold">Checkout</a>
           <button class="btn btn-light" type="button">Save for later</button>
         </div>
       </div>
       <div class="col-md-7 col-lg-8 p-0">
 
-        {% for item in basket %} 
-        {% with product=item.product %}
+        
 
         <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
           <div class="row g-0">
@@ -72,7 +75,9 @@
   // Delete Item
   $(document).on('click', '.delete-button', function (e) {
     e.preventDefault();
+    console.log("yo") 
     var prodid = $(this).data('index');
+    console.log(prodid)
     $.ajax({
       type: 'POST',
       url: '{% url "basket:basket_delete" %}',
@@ -90,5 +95,19 @@
     });
   })
 </script>
+
+<script src="{% static 'js/lib/bignumber.min.js'%}"></script>
+<script src="{% static 'js/lib/web3.min.js'%}"></script>
+<script src="{% static 'js/lib/truffle-contract.min.js'%}"></script>
+<script src="{% static 'js/lib/doggyidparser.js'%}"></script>
+<script src="{% static 'js/doggies.js' %}"></script>
+<script> 
+  $(document).on('click', '.checkout-button', function (e) {
+    e.preventDefault();
+    var tokenId = parseInt($(this).data('index'));
+    App.handlePurchase(e, tokenId);      
+  })
+</script>
+
 
 {% endblock %}

@@ -57,6 +57,9 @@ class Basket():
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
 
+    def get_token_id(self):
+        return Decimal(item['tokenID'])
+
     # Delete item from basket (session data)
     def delete(self, product):
         product_id = str(product)

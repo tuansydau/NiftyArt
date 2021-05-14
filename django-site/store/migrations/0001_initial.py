@@ -17,7 +17,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(db_index=True, max_length=255)),
                 ('slug', models.SlugField(max_length=255, unique=True)),
             ],
@@ -28,8 +29,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
+                ('tokenID', models.CharField(max_length=255)),
                 ('artist', models.CharField(default='admin', max_length=255)),
                 ('description', models.TextField(blank=True)),
                 ('image', models.ImageField(upload_to='images/')),
@@ -39,8 +42,10 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product', to='store.category')),
-                ('create_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_creator', to=settings.AUTH_USER_MODEL)),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='product', to='store.category')),
+                ('create_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='product_creator', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name_plural': 'Products',

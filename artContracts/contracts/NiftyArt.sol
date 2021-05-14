@@ -20,12 +20,11 @@ contract DetailedERC721 is ERC721 {
 	function symbol() public view returns (string _symbol);
 }
 
-//refactor everything with either dna or cryptodoggies label
-contract CryptoDoggies is AccessControl, DetailedERC721{
+contract NiftyArt is AccessControl, DetailedERC721{
 	using SafeMath for uint256;
 
-	event TokenCreated(uint256 tokenId, string name, bytes5 dna, uint256 price, address owner);
-	event TokenSold(uint256 indexed tokenId, string name, bytes5 dna, uint256 sellingPrice, uint256 newPrice, address indexed oldOwner, address indexed newOwner);
+	event TokenCreated(uint256 tokenId, string name, string link, uint256 price, address owner);
+	event TokenSold(uint256 indexed tokenId, string name, string link, uint256 sellingPrice, uint256 newPrice, address indexed oldOwner, address indexed newOwner);
 
 	mapping (uint256 => address) private tokenIdToOwner;
 	mapping (uint256 => uint256) private tokenIdToPrice;
@@ -35,13 +34,12 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 	//   in order to allow transfer between ERC721 platforms
 	mapping (uint256 => address) private tokenIdToApproved;
 
-	struct Doggy{
+	struct Art{
 		string name;
-		bytes5 dna;
+		string link;
 	}
 
-	//rf
-	Doggy[] private doggies;
+	Art[] private arts;
 
 	uint256 private startingPrice = 0.01 ether;
 
@@ -56,48 +54,39 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 	// Token creation and access functions
 
 	// Allows us to deposit into an address as opposed to auctioning it
-	function createToken(string _name, address _owner, uint256 _price) public onlyCLevel {
+	function createToken(string _name, string _link, address _owner, uint256 _price) public onlyCLevel {
 		require(_owner != address(0));
 		require (_price >= startingPrice);
 
-		bytes5 _dna = _generateRandomDna();
-		_createToken(_name, _dna, _owner, _price);
+		_createToken(_name, _link, _owner, _price);
 	}
 
 	// Creates token and deposits it into the smart contract's address
-	function createToken(string _name) public onlyCLevel {
-		bytes5 _dna = _generateRandomDna();
-		_createToken(_name, _dna, address(this), startingPrice);
+	function createToken(string _name, string _link) public onlyCLevel {
+		_createToken(_name, _link, address(this), startingPrice);
 	}
 
-	function _generateRandomDna() private view returns (bytes5) {
-		uint256 lastBlockNumber = block.number - 1;
-		bytes32 hashVal = bytes32(block.blockhash(lastBlockNumber));
-		bytes5 dna = bytes5((hashVal & 0xffffffff) << 216);
-		return dna;
-	}
-
-	function _createToken(string _name, bytes5 _dna, address _owner, uint256 _price) private {
-		Doggy memory _doggy = Doggy({
+	function _createToken(string _name, string _link, address _owner, uint256 _price) private {
+		Art memory _art = Art({
 			name: _name,
-			dna: _dna
+			link: _link
 		});
-		uint256 newTokenId = doggies.push(_doggy) - 1;
+		uint256 newTokenId = arts.push(art) - 1;
 		tokenIdToPrice[newTokenId] = _price;
 
-		TokenCreated(newTokenId, _name, _dna, _price, _owner);
+		TokenCreated(newTokenId, _name, _link, _price, _owner);
 		_transfer(address(0), _owner, newTokenId);
 	}
 
 	function getToken(uint256 _tokenId) public view returns (
 		string _tokenName,
-		bytes5 _dna,
+		string _link,
 		uint256 _price,
 		uint256 _nextPrice,
 		address _owner
 	) {
-		_tokenName = doggies[_tokenId].name;
-		_dna = doggies[_tokenId].dna;
+		_tokenName = arts[_tokenId].name;
+		_link = arts[_tokenId].link;
 		_price = tokenIdToPrice[_tokenId];
 		_nextPrice = nextPriceOf(_tokenId);
 		_owner = tokenIdToOwner[_tokenId];
@@ -172,8 +161,8 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 		tokenIdToPrice[_tokenId] = nextPriceOf(_tokenId);
 		TokenSold(
 			_tokenId,
-			doggies[_tokenId].name,
-			doggies[_tokenId].dna,
+			arts[_tokenId].name,
+			arts[_tokenId].link,
 			sellingPrice,
 			priceOf(_tokenId),
 			oldOwner,
@@ -221,7 +210,7 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 	}
 
 	function totalSupply() public view returns (uint256 _totalSupply){
-		_totalSupply = doggies.length;
+		_totalSupply = arts.length;
 	}
 
 	function balanceOf(address _owner) public view returns (uint256 _balance){
@@ -263,11 +252,11 @@ contract CryptoDoggies is AccessControl, DetailedERC721{
 	}
 
 	function name() public view returns (string _name){
-		_name = "Name of Token"; // Name on etherscan when viewed
+		_name = "Nifty Art"; // Name on etherscan when viewed
 	}
 
 	function symbol() public view returns (string _symbol) {
-		_symbol = "CDT";
+		_symbol = "NTA";
 	}
 
 	function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
