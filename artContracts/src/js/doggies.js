@@ -2,7 +2,7 @@
 var App = {
 
   contracts: {},
-  CryptoDoggiesAddress: '0xAedEa36E917b7b6EC124b55E86cc42B13D7Cf113',
+  CryptoDoggiesAddress: '0x8f83dE9D577f7004df87474C96052CaB9992d486',
 
   async init() {
     return await App.initWeb3();
