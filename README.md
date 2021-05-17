@@ -19,6 +19,8 @@ Once this is done, head to [https://faucet.ropsten.be/](https://faucet.ropsten.b
 
 ![Screen Recording 2021-05-16 at 11 12 41 PM](https://user-images.githubusercontent.com/26176104/118428198-eb135c00-b69c-11eb-839e-332ab7d5dc4e.gif)
 
+You are now ready to start the website and get testing!
+
 # 3. How to Start the Website
 
 In order to start the website, navigate to the django-site/ folder in terminal, and then enter the following:
