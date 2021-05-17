@@ -14,6 +14,8 @@ python -m pip install Django
 To set up Metamask, start by creating a wallet by clicking through the tutorial after you install Metamask. Once you get to the wallet menu, click on the networks dropdown and select "Ropsten Test Network": 
 
 ![image](https://user-images.githubusercontent.com/26176104/118425691-b355e580-b697-11eb-9606-0e79cdbf00d9.png)
+118425691-b355e580-b697-11eb-9606-0e79cdbf00d9.png![image](https://user-images.githubusercontent.com/26176104/118428349-3e85aa00-b69d-11eb-950a-0585852882d7.png)
+
 
 Once this is done, head to [https://faucet.ropsten.be/](https://faucet.ropsten.be/), paste in your test wallet address, and click "Send me test Ether" as follows:
 
