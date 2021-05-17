@@ -1,6 +1,6 @@
 # 1. Nifty Art
 
-Nifty Art is an NFT exchange for AI-Generated Art as NFTs. The exchange is built on Django, HTML/CSS, Javascript, and interacts with a Solidity smart contract on the Ropsten Ethereum Test Network. 
+Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange is built on Django, HTML/CSS, Javascript, and interacts with a Solidity smart contract on the Ropsten Ethereum Test Network. 
 
 # 2. Demo GIFs and Images
 
@@ -10,6 +10,14 @@ In order to start and use the project, you will need [Django](https://docs.djang
 ```
 python -m pip install Django
 ```
+
+To set up Metamask, start by creating a wallet by clicking through the tutorial after you install Metamask. Once you get to the wallet menu, click on the networks dropdown and select "Ropsten Test Network": 
+
+![image](https://user-images.githubusercontent.com/26176104/118425691-b355e580-b697-11eb-9606-0e79cdbf00d9.png)
+
+Once this is done, head to [https://faucet.ropsten.be/](https://faucet.ropsten.be/), paste in your test wallet address, and click "Send me test Ether" as follows:
+
+![Screen Recording 2021-05-16 at 11 12 41 PM](https://user-images.githubusercontent.com/26176104/118428198-eb135c00-b69c-11eb-839e-332ab7d5dc4e.gif)
 
 # 3. How to Start the Website
 
