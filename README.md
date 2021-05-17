@@ -4,7 +4,9 @@ Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange
 
 # Demo GIFs and Images
 ![Screen Recording 2021-05-16 at 11 12 41 PM](https://user-images.githubusercontent.com/59661629/118429871-b6a19f00-b6a0-11eb-9281-fc9784607969.gif)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/59661629/118429871-b6a19f00-b6a0-11eb-9281-fc9784607969.gif">
+</p>
 
 # Installing Dependencies
 In order to start and use the project, you will need [Django](https://docs.djangoproject.com/en/3.2/topics/install/), as well as the [Metamask browser extension](https://metamask.io/download). To install Django on Mac/Linux, run the following command in your terminal:
