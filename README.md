@@ -41,4 +41,5 @@ This was my first time developing a full website so I had to find a place where 
 
 
 [1] https://www.youtube.com/channel/UC1mxuk7tuQT2D0qTMgKji3w
+
 [2] https://www.youtube.com/watch?v=UqSJCVePEWU&list=PLOLrQ9Pn6caxY4Q1U9RjO1bulQp5NDYS_
