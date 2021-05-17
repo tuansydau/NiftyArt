@@ -6,7 +6,6 @@
 Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange is built on Django, HTML/CSS, Javascript, and interacts with a Solidity smart contract deployed on the Ropsten Ethereum Test Network. 
 
 # Demo GIFs and Images
-1. A demo of a user browsing through different artworks on the site.
 
 https://user-images.githubusercontent.com/59661629/118431507-878d2c80-b6a4-11eb-9607-d43b26af1dc9.mov
 
