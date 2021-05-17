@@ -1,3 +1,6 @@
+
+
+
 # Nifty Art
 
 Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange is built on Django, HTML/CSS, Javascript, and interacts with a Solidity smart contract deployed on the Ropsten Ethereum Test Network. 
@@ -5,10 +8,8 @@ Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange
 # Demo GIFs and Images
 1. A demo of a user browsing through different artworks on the site.
 
+https://user-images.githubusercontent.com/59661629/118431078-932c2380-b6a3-11eb-8084-be78e59a7c9d.mov
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/59661629/118430950-46484d00-b6a3-11eb-8dc1-bd46bb91793f.gif">
-</p>
 
 # Installing Dependencies
 In order to start and use the project, you will need [Django](https://docs.djangoproject.com/en/3.2/topics/install/), as well as the [Metamask browser extension](https://metamask.io/download). To install Django on Mac/Linux, run the following command in your terminal:
