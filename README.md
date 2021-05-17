@@ -1,10 +1,10 @@
-# 1. Nifty Art
+# Nifty Art
 
 Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange is built on Django, HTML/CSS, Javascript, and interacts with a Solidity smart contract on the Ropsten Ethereum Test Network. 
 
-# 2. Demo GIFs and Images
+# Demo GIFs and Images
 
-# p3. Starting the server
+# Installing Dependencies
 In order to start and use the project, you will need [Django](https://docs.djangoproject.com/en/3.2/topics/install/), as well as the [Metamask browser extension](https://metamask.io/download). To install Django on Mac/Linux, run the following command in your terminal:
 
 ```
@@ -13,16 +13,17 @@ python -m pip install Django
 
 To set up Metamask, start by creating a wallet by clicking through the tutorial after you install Metamask. Once you get to the wallet menu, click on the networks dropdown and select "Ropsten Test Network": 
 
-![image](https://user-images.githubusercontent.com/26176104/118428349-3e85aa00-b69d-11eb-950a-0585852882d7.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26176104/118428349-3e85aa00-b69d-11eb-950a-0585852882d7.png">
+</p>
 
-
-Once this is done, head to [https://faucet.ropsten.be/](https://faucet.ropsten.be/), paste in your test wallet address, and click "Send me test Ether" as follows:
+Once this is done, head to [https://faucet.ropsten.be/](https://faucet.ropsten.be/). Copy and paste your testnet wallet address into the textbox, and click "Send me test Ether" as follows:
 
 ![Screen Recording 2021-05-16 at 11 12 41 PM](https://user-images.githubusercontent.com/26176104/118428198-eb135c00-b69c-11eb-839e-332ab7d5dc4e.gif)
 
 You are now ready to start the website and get testing!
 
-# 3. How to Start the Website
+# 3. Starting the Website
 
 In order to start the website, navigate to the django-site/ folder in terminal, and then enter the following:
 
