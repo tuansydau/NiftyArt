@@ -30,7 +30,13 @@ You are now ready to start the website and get testing!
 
 # 3. Starting the Website
 
-In order to start the website, navigate to the django-site/ folder in terminal, and then enter the following:
+In order to start the website, navigate to the django-site/ folder in terminal.
+
+```
+cd django-site/
+```
+
+Then, in the django-site/ directory, enter the following:
 
 ```
 django manage.py runserver
