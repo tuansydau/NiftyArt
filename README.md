@@ -7,7 +7,7 @@ Nifty Art is an exchange where you can be AI-Generated Art as NFTs! The exchange
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/59661629/118430682-9e328400-b6a2-11eb-869f-e88a1b095324.gif">
+  <img src="https://user-images.githubusercontent.com/59661629/118430950-46484d00-b6a3-11eb-8dc1-bd46bb91793f.gif">
 </p>
 
 # Installing Dependencies
