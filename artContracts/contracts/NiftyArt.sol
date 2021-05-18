@@ -181,6 +181,49 @@ contract NiftyArt is AccessControl, DetailedERC721{
 		}
 	}
 
+	function purchaseMultiple (uint256[] _tokenIdArray) public payable whenNotPaused {
+		uint256 sellingPrice = 0;
+		address newOwner = msg.sender;
+
+		require(newOwner != address(0));
+		require(!_isContract(newOwner));
+
+		for (uint256 i = 0; i < _tokenIdArray.length; i++){
+			sellingPrice = sellingPrice.add(_tokenIdArray[i]);
+			require(ownerOf(_tokenIdArray[i]) != address(0));
+			require(ownerOf(_tokenIdArray[i]) != newOwner);
+		}
+
+		require(sellingPrice > 0);
+		require(msg.value >= sellingPrice);
+
+
+		for (uint256 j = 0; j < _tokenIdArray.length; j++){
+			_transfer(ownerOf(_tokenIdArray[j]), newOwner, _tokenIdArray[i]);
+			tokenIdToPrice[_tokenIdArray[j]] = nextPriceOf(_tokenIdArray[j]);
+			// TokenSold(
+			// 	_tokenIdArray[j],
+			// 	arts[_tokenIdArray[j]].name,
+			// 	arts[_tokenIdArray[j]].link,
+			// 	sellingPrice,
+			// 	priceOf(_tokenIdArray[j]),
+			// 	ownerOf(_tokenIdArray[j]),
+			// 	newOwner
+			// );
+		}
+
+		// uint256 excess = msg.value.sub(sellingPrice);
+		// uint256 contractCut = sellingPrice.mul(6).div(100);
+
+		// if (oldOwner != address(this)) {
+		// 	oldOwner.transfer(sellingPrice.sub(contractCut));
+		// }
+
+		// if (excess > 0) {
+		// 	newOwner.transfer(excess);
+		// }
+	}
+
 	function priceOf(uint256 _tokenId) public view returns (uint256){
 		return tokenIdToPrice[_tokenId];
 	}
@@ -192,7 +235,7 @@ contract NiftyArt is AccessControl, DetailedERC721{
 	
 	function nextPriceOf(uint256 _tokenId) public view returns (uint256 _nextPrice) {
 		uint256 _price = priceOf(_tokenId);
-		return _price.add(.1);
+		return _price.mul(6).div(100);
 	}
 
 	function enableERC721() public onlyCEO {
