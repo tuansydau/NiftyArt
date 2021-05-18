@@ -3,7 +3,7 @@
 var App = {
 
   contracts: {},
-  CryptoDoggiesAddress: '0x8f83dE9D577f7004df87474C96052CaB9992d486',
+  CryptoDoggiesAddress: '0xaeb89bab4f8ca12d46e898ac2045db81cfd26cdd',
 
   async init() {
     return await App.initWeb3();
@@ -40,7 +40,7 @@ var App = {
   //   },
 
   initContract() {
-    $.getJSON("/static/js/CryptoDoggies.json", (data) => {
+    $.getJSON("/static/js/NiftyArt.json", (data) => {
       const CryptoDoggiesArtifact = data;
       App.contracts.CryptoDoggies = TruffleContract(CryptoDoggiesArtifact);
       App.contracts.CryptoDoggies.setProvider(App.web3Provider);
