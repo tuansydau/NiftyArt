@@ -1,5 +1,0 @@
-{
-    "solidity.defaultCompiler": "remote",
-    "solidity.compileUsingRemoteVersion": "v0.4.18+commit.9cf6e910",
-    "python.pythonPath": "/Users/alborzgharabaghi/miniforge3/envs/django/bin/python"
-}

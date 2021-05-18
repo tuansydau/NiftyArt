@@ -50,27 +50,27 @@ var App = {
     return App.bindEvents();
   },
 
-  // loadDoggies() {
-  //   web3.eth.getAccounts(function (err, accounts) {
-  //     if (err != null) {
-  //       console.error("An error occurred: " + err);
-  //     } else if (accounts.length == 0) {
-  //       console.log("User is not logged into MetaMask");
-  //     } else {
-  //       $('#card-row').children().remove();
-  //     }
-  //   });
+  loadDoggies() {
+    web3.eth.getAccounts(function (err, accounts) {
+      if (err != null) {
+        console.error("An error occurred: " + err);
+      } else if (accounts.length == 0) {
+        console.log("User is not logged into MetaMask");
+      } else {
+        $('#card-row').children().remove();
+      }
+    });
 
-  //   var address = web3.eth.defaultAccount;
-  //   let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
-  //   return totalSupply = contractInstance.totalSupply().then((supply) => {
-  //     for (var i = 0; i < supply; i++) {
-  //       App.getDoggyDetails(i, address);
-  //     }
-  //   }).catch((err) => {
-  //     console.log(err.message);
-  //   });
-  // },
+    var address = web3.eth.defaultAccount;
+    let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
+    return totalSupply = contractInstance.totalSupply().then((supply) => {
+      for (var i = 0; i < supply; i++) {
+        App.getDoggyDetails(i, address);
+      }
+    }).catch((err) => {
+      console.log(err.message);
+    });
+  },
 
   getDoggyDetails(doggyId, localAddress) {
     let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
