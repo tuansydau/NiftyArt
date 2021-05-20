@@ -21,6 +21,14 @@ def dashboard(request):
                   {'section': 'profile', 'orders': orders})
 
 
+@login_required
+def completed_orders(request):
+    orders = user_orders(request)
+    return render(request,
+                  'account/dashboard/completed_orders.html',
+                  {'section': 'profile', 'orders': orders})
+
+
 def account_register(request):
 
     # Check to see that user is authenticated before registering
