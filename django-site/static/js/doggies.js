@@ -88,30 +88,43 @@ var App = {
   },
 
   handlePurchase(event, tokenId) {
-    event.preventDefault();
-    console.log('handlePurchase function');
-    var doggyId = tokenId;
-    //var doggyId = $(event.target.elements).closest('.checkout-button').data('index');
+    $.ajax({
+      type: "POST",
+      url: 'http://127.0.0.1:8000/orders/add/',
+      data: {
+        order_key: tokenId,
+        csrfmiddlewaretoken: CSRF_TOKEN,
+        action: "post",
+      },
+      success: function (json) {
+        event.preventDefault();
+        console.log('handlePurchase function');
+        var doggyId = tokenId;
+        //var doggyId = $(event.target.elements).closest('.checkout-button').data('index');
 
-    //parseInt($(event.target.elements).closest('.btn-buy').data('id'));
+        //parseInt($(event.target.elements).closest('.btn-buy').data('id'));
 
-    web3.eth.getAccounts((error, accounts) => {
-      if (error) {
-        console.log(error);
-      }
-      var account = accounts[0];
+        web3.eth.getAccounts((error, accounts) => {
+          if (error) {
+            console.log(error);
+          }
+          var account = accounts[0];
 
-      let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
-      contractInstance.priceOf(doggyId).then((price) => {
-        console.log("before priceOf(doggyId)")
-        return contractInstance.purchase(doggyId, {
-          from: account,
-          value: price,
-        }).then(result => App.loadDoggies()).catch((err) => {
-          console.log(err.message);
+          let contractInstance = App.contracts.CryptoDoggies.at(App.CryptoDoggiesAddress);
+          contractInstance.priceOf(doggyId).then((price) => {
+            console.log("before priceOf(doggyId)")
+            return contractInstance.purchase(doggyId, {
+              from: account,
+              value: price,
+            }).then(result => App.loadDoggies()).catch((err) => {
+              console.log(err.message);
+            });
+          });
         });
-      });
-    });
+      },
+      error: function (xhr, errmsg, err) {},
+    })
+
   },
 
   bindEvents() {

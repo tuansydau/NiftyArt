@@ -7,9 +7,18 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
+from orders.views import user_orders
 from .models import UserBase
 from .token import account_activation_token
 from .forms import RegistrationForm, UserEditForm
+
+
+@login_required
+def dashboard(request):
+    orders = user_orders(request)
+    return render(request,
+                  'account/dashboard/dashboard.html',
+                  {'section': 'profile', 'orders': orders})
 
 
 def account_register(request):
@@ -38,7 +47,7 @@ def account_register(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
-            return HttpResponse('registered succesfully and activation sent')
+            return render(request, 'account/registration/register_email_confirm.html')
     else:
         registerForm = RegistrationForm()
     return render(request, 'account/registration/register.html', {'form': registerForm})
@@ -59,11 +68,6 @@ def account_activate(request, uidb64, token):
         return redirect('account:dashboard')
     else:
         return render(request, 'account/registration/activation_invalid.html')
-
-
-@login_required
-def dashboard(request):
-    return render(request, 'account/dashboard/dashboard.html')
 
 
 @login_required

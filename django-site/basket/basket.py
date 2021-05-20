@@ -1,5 +1,6 @@
 from decimal import Decimal
 from store.models import Product
+from django.conf import settings
 
 
 class Basket():
@@ -8,11 +9,11 @@ class Basket():
         # We are grabbing information from the request, it has the session in it
         self.session = request.session
         # Gets the session of the user, name is skey
-        basket = self.session.get('skey')
+        basket = self.session.get(settings.BASKET_SESSION_ID)
         # If there is no session active, build a session in 'basket'
-        if 'skey' not in request.session:
+        if settings.BASKET_SESSION_ID not in request.session:
             # Default session number
-            basket = self.session['skey'] = {}
+            basket = self.session[settings.BASKET_SESSION_ID] = {}
         # Setting the basket data
         self.basket = basket
 
@@ -69,3 +70,7 @@ class Basket():
 
     def save(self):
         self.session.modified = True
+
+    def clear(self):
+        self.session[settings.BASKET_SESSION_ID]
+        self.save()

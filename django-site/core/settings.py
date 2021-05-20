@@ -26,7 +26,7 @@ SECRET_KEY = 'j35@&q&a-*p*$$hm_zsfltw41b(p96@%%2@+&ibt2bx$mj)ezh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'basket',
-    'account'
+    'account',
+    'payment',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +131,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
-
+BASKET_SESSION_ID = 'basket'
 MEDIA_URL = '/front-end/img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'front-end/img')
 

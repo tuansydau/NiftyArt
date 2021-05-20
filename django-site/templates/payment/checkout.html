@@ -1,0 +1,33 @@
+{% extends "../base.html" %} {% load static %} {% block title %}Checkout Page{%endblock %}
+
+{% block content %}
+
+{% for item in basket %}
+{% with product=item.product %}
+<div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
+    <div class="d-grid gap-2 ">
+        <a type="button" id="checkout-button" data-index="{{product.tokenID}}"
+            class="checkout-button btn btn-success fw-bold">Checkout</a>
+    </div>
+</div>
+<div class="col-md-7 col-lg-8 p-0">
+{% endwith %}
+{% endfor %}
+
+<script>
+    var CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+
+<script src="{% static 'js/lib/bignumber.min.js'%}"></script>
+<script src="{% static 'js/lib/web3.min.js'%}"></script>
+<script src="{% static 'js/lib/truffle-contract.min.js'%}"></script>
+<script src="{% static 'js/lib/doggyidparser.js'%}"></script>
+<script src="{% static 'js/doggies.js' %}"></script>
+<script>
+    $(document).on('click', '.checkout-button', function (e) {
+        e.preventDefault();
+        var tokenId = parseInt($(this).data('index'));
+        App.handlePurchase(e, tokenId);
+    })
+</script>
+{% endblock %}
