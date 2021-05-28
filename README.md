@@ -7,10 +7,13 @@ Nifty Art is an exchange where you can buy AI-Generated Art as NFTs! The exchang
 
 # Demo GIFs and Images
 
-https://user-images.githubusercontent.com/59661629/118431507-878d2c80-b6a4-11eb-9607-d43b26af1dc9.mov
+
+https://user-images.githubusercontent.com/59661629/119915302-35fc6180-bf30-11eb-8bfa-dddc48bfdcf1.mov
 
 https://user-images.githubusercontent.com/59661629/119914401-00ef0f80-bf2e-11eb-9ac3-19d6707a3d44.mov
 
+(Purchase with MetaMask still being tweaked)
+https://user-images.githubusercontent.com/59661629/119915598-d94d7680-bf30-11eb-8818-8c6977134ee1.mov
 
 
 
